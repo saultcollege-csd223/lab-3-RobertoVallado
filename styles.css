@@ -39,3 +39,12 @@ li {
 .nav-link:hover .fa {
     transform: rotate(360deg)
 }
+
+.chart-container {
+    width:600px; 
+    height:600px;
+  }
+
+  .code-container {
+    width:800px; 
+  }

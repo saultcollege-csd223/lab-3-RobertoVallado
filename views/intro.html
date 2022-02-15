@@ -3,7 +3,7 @@
   <i>easily</i> create charts for a better UI.
   <br />
   As we dive more in the basics of the library we will see some of the
-  advantages of adding a library to our projects. <br />
+  advantages of adding a library to our projects. <br /><br />
   So far we have engaged with Javascript libraries on this semester. We learned
   on JQuery and Alpine; we made use of its functionalities and realize how easy
   made our jobs at the time of writting code.
@@ -14,13 +14,15 @@
   developer.
   <br />
   <br />
-  As Developers we have to learn to take advantages of this open chunks of code
-  that will make our lives easier.
+  <mark>
+      As Developers we have to learn to take advantages of this open chunks of
+    code that will make our lives easier.</mark
+  >
 </p>
 <h5>Security</h5>
 <p>
   Some of the libraries are there to promote the use of certain products. For
-  example: <code>PayPal</code>; Paypal has its own library to make easier the
+  example: <code>PayPal</code>. <br> Paypal has its own library to make easier the
   life of the developer by being able to embed a whole checkout GUI in a
   website. I personally find that mind-blowing. I took on programming to help my
   financial situation and move unto passive income. Libraries like PayPal or
@@ -33,12 +35,28 @@
   data visualization.
 </p>
 <br />
-<canvas id="introChart"></canvas>
+<div class="chart-container">
+  <canvas id="introChart"></canvas>
+</div>
 <script>
   const ctx0 = document.getElementById("introChart");
-  //   ctx0.parentNode.style.width = "400px";
-  //   ctx0.parentNode.style.width = "400px";
   ctx0.getContext("2d");
+
+  const myOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scale: {
+      angleLines: {
+        display: true,
+      },
+    },
+    ticks: {
+      //   min: 0,
+      max: 20,
+      beginAtZero: true,
+      stepSize: 5 /* 25 - 50 - 75 - 100 */,
+    },
+  };
 
   const introChart = new Chart(ctx0, {
     type: "radar",
@@ -54,7 +72,7 @@
       datasets: [
         {
           label: "Skills Matrix",
-          data: [12, 19, 2, 12, 15, 12],
+          data: [16, 19, 12, 16, 18, 13],
           backgroundColor: [
             "rgba(140, 240, 122, 0.2)",
             "rgba(54, 162, 235, 0.2)",
@@ -64,10 +82,10 @@
             "rgba(255, 159, 64, 0.2)",
           ],
           borderColor: [
-            "rgba(140, 240, 122, 1)",
+            "green",
             "rgba(54, 162, 235, 1)",
             "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
+            "blue",
             "rgba(153, 102, 255, 1)",
             "rgba(255, 159, 64, 1)",
           ],
@@ -75,29 +93,110 @@
         },
       ],
     },
+    options: myOptions,
   });
 </script>
-<p>The code for this sample is very easy to understand and intuitive/</p>
-<pre>
-    <code class="language-javascript">
-const ctx0 = document.getElementById("introChart");
-//   ctx0.parentNode.style.width = "400px";
-//   ctx0.parentNode.style.width = "400px";
+<p>
+  The code for this sample is very easy to understand and intuitive. BUT...First
+  things first, we make use of libraries by either downoading it or using a CDN
+  that we embed in our HMTL code. Is possible to
+  <i>inspect</i> this website as a reference using your developer tools
+  <i>(by pressing F12)</i>; I made sure to comment the header for your ease.
+</p>
+<h6>Note:</h6>
+<p>
+  All the following code is to be run in a <code>canvas</code> tag. As we
+  inspect the code we will see how we are targetting the Canvas tag element
+  using the DOM in order to manipulate it and inject the chart from our CDN.
+</p>
+
+<div class="code-container">
+  <pre><code class="language-javascript">
+const ctx0 = document.getElementById("introChart"); //use DOM to target the HTML element canvas
 ctx0.getContext("2d");
 
-const introChart = new Chart(ctx0, {
-type: "radar",
-data: {
+/*In this case I added a body of options that is notthing else but an object.
+NOTE: chart.js has a specific order for the properties of the object to be.*/
+
+const myOptions = { 
+    responsive: true,
+    maintainAspectRatio: false,
+    scale: {
+    angleLines: {
+        display: true,
+    },
+    },
+    ticks: {
+    //   min: 0,
+    max: 20,
+    beginAtZero: true,
+    stepSize: 5,
+    },
+};
+</code></pre>
+</div>
+<p>
+  I start instantiating my variables as a good practice. We will be making use
+  of that object as a whole value that we will be able to tweak to suit our
+  needs.
+</p>
+<div class="code-container">
+  <pre><code class="language-javascript">
+/*IMPORTANT: Naming conventions are of great importance in Chart.js. 
+the constant name of the chart has to be the same of the canvas id */
+
+const introChart = new Chart(ctx0, { 
+type: "radar", //type is the value where we define the type of chart.
+
+/*data takes values such as labels and datasets 
+    (this allows us to add more datasets dynamically) isnt that exiting? */
+
+data: { 
 labels: [
-"Kung-Fu",
-"Dog-poop scooping",
-"Skateboarding",
-"Motorcycle riding",
-"Programming",
-"Languages",
+    "Kung-Fu",
+    "Dog-poop scooping",
+    "Skateboarding",
+    "Motorcycle riding",
+    "Programming",
+    "Languages",
 ],
 datasets: [
-{
-      }
-    </code>
-</pre>
+    {
+    label: "Skills Matrix", 
+/*'data' takes an array with values & 
+    the library takes care of pair those values to the labels! */
+    data: [16, 19, 12, 16, 18, 13], 
+    backgroundColor: [
+        "rgba(140, 240, 122, 0.2)",
+        "rgba(54, 162, 235, 0.2)",
+        "rgba(255, 206, 86, 0.2)",
+        "rgba(75, 192, 192, 0.2)",
+        "rgba(153, 102, 255, 0.2)",
+        "rgba(255, 159, 64, 0.2)", //colors to be added use RGB values
+    ],
+    borderColor: [
+        "green",                  //but it also takes strings for colors
+        "rgba(54, 162, 235, 1)",
+        "rgba(255, 206, 86, 1)",
+        "blue",
+        "rgba(153, 102, 255, 1)",
+        "rgba(255, 159, 64, 1)",
+    ],
+    borderWidth: 2,
+    },
+],
+},
+options: myOptions, //I made use of the object constant previously instanciated.
+});
+</code></pre>
+</div>
+<p>
+  I personally like to first go to the docs of the library, skim the explanation, try
+  to understand what is going on, copy and paste the first sample and give it a
+  try.If there is a basic understanding of what the library does I can make
+  better sense of its functionalities and the "<i>how</i>".
+  <br />
+  <br />
+  We will move on unto some more examples that I found to be fun to try and
+  hopefully we can get our <i>"hands dirty"</i> and learn by doing!🔨
+</p>
