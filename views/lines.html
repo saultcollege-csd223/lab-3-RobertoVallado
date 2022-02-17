@@ -64,7 +64,8 @@
   <pre style="margin-bottom: 0px">
     <code class="language-javascript">
 async function getAPIdata() {
-  const response = await fetch("https://api.opencovid.ca/timeseries?stat=cases&loc=3595&after=01-01-2022&before=15-02-2022");
+  const response = await fetch(
+    "https://api.opencovid.ca/timeseries?stat=cases&loc=3595&after=01-01-2022&before=15-02-2022");
 
   if (!response.ok) {
       throw new Error("Error loading the API");

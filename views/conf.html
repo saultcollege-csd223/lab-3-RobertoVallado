@@ -1,8 +1,148 @@
-<h2>This is the <title>CONF studff</title></h2>
-<p>configure</p>
-<p>configure</p>
-<p>configure</p>
-<p>configure</p>
-<p>configure</p>
-<p>configure</p>
-<p>configure</p>
+<p>
+  This is the part where we take on thinking of what is that we can do with the
+  library and what will enable us to take up on those challenges.
+</p>
+<p>
+  As we saw in our chart snippets we are able to add values to the body of the
+  chart that is represented as an object.
+</p>
+<div class="code-container">
+  <pre><code class="language-javascript">
+const ourOptions = {
+    responsive: true,
+    plugins: {
+        legend: {
+        labels: {
+            boxWidth: 0,
+            },
+        },
+    },
+}; 
+</code>
+</pre>
+</div>
+<p>This way we took care of our options. Remeber?</p>
+<div class="code-container">
+  <pre><code class="language-javascript">
+const config = {
+    type: 'line'
+    data: {}
+    options: {}
+    plugins: []
+    }    
+  </code>
+  </pre>
+</div>
+<p>
+  As we can see in this particular snippet provided by our Chart.js
+  documentation. We are encouraged to keep our configuration <i>ordered</i> or
+  <i>clean</i>.
+  <br />
+  <br />
+  At this point we already know what the type does
+  <i>(defines the chart type)</i>, data
+  <i>(which is the actual data that the chart will represent)</i> and options
+  <i>(where we keep our values for the chart to take as ...well, 'options')</i>
+</p>
+<p>
+  In the case of my line chart I could also set a fill for the chart, which will
+  result in a ugly chart.
+</p>
+<div class="chart-container-dos">
+  <canvas id="configDemo"></canvas>
+</div>
+<script src="app.js"></script>
+<script>
+  const configDemoOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 0,
+        },
+      },
+    },
+  };
+
+  generateLineChart();
+
+  async function generateLineChart() {
+    const APIdata = await getAPIdata();
+    const modelDataObj = createModelFromJSON(APIdata);
+
+    const ctx4 = document.getElementById("configDemo").getContext("2d");
+
+    const configDemo = new Chart(ctx4, {
+      type: "line",
+      data: {
+        labels: modelDataObj.dates, //dates
+        datasets: [
+          {
+            label:
+              "COVID cases from " +
+              modelDataObj.healthArea +
+              " " +
+              modelDataObj.province +
+              " from January 01 -2022 to February 14 - 2022",
+            data: modelDataObj.cases, //cases
+            fill: true,
+            backgroundColor: "red",
+            borderColor: "rgba(240, 127, 131, 0.9)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: configDemoOptions,
+    });
+  }
+</script>
+<p>
+  Notice how we only add a single boolean value to our now added
+  <code>fill</code>. <br />
+  The result is hideous, but we see the point.
+</p>
+<div class="code-container">
+  <pre><code class="language-javascript">
+async function generateLineChart() {
+    const APIdata = await getAPIdata();
+    const modelDataObj = createModelFromJSON(APIdata);
+
+    const ctx4 = document.getElementById("configDemo").getContext("2d");
+
+    const configDemo = new Chart(ctx4, {
+        type: "line",
+        data: {
+        labels: modelDataObj.dates,
+        datasets: [
+            {
+            label:
+                "COVID cases from " +
+                modelDataObj.healthArea +
+                " " +
+                modelDataObj.province +
+                " from January 01 -2022 to February 14 - 2022",
+            data: modelDataObj.cases,
+            fill: true, //is that it?😱 SO SIMPLE!
+            backgroundColor: "red",
+            borderColor: "rgba(240, 127, 131, 0.9)",
+            borderWidth: 1,
+            },
+        ],
+        },
+        options: configDemoOptions,
+    });
+    }
+    </code>
+    </pre>
+</div>
+<p>
+  Fill is not the only option avialable, there are plenty in order to suit our
+  needs.
+</p>
+<h6>REMEMBER:</h6>
+<p>
+  <i
+    >Libraries are here to make our lives easier. Is just a matter of fiddle
+    with the docs and configurations avialable.</i
+  >
+</p>
