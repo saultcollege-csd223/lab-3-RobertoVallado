@@ -15,24 +15,25 @@
   <br />
   <br />
   <mark>
-      As Developers we have to learn to take advantages of this open chunks of
+    As Developers we have to learn to take advantages of this open chunks of
     code that will make our lives easier.</mark
   >
 </p>
 <h5>Security</h5>
 <p>
   Some of the libraries are there to promote the use of certain products. For
-  example: <code>PayPal</code>. <br> Paypal has its own library to make easier the
-  life of the developer by being able to embed a whole checkout GUI in a
-  website. I personally find that mind-blowing. I took on programming to help my
-  financial situation and move unto passive income. Libraries like PayPal or
-  others like <code>Stripe</code> let us move unto the next stage of the
-  development without worrying about how we can secure our app.
+  example: <code>PayPal</code>. <br />
+  Paypal has its own library to make easier the life of the developer by being
+  able to embed a whole checkout GUI in a website. I personally find that
+  mind-blowing. I took on programming to help my financial situation and move
+  unto passive income. Libraries like PayPal or others like
+  <code>Stripe</code> let us move unto the next stage of the development without
+  worrying about how we can secure our app.
 </p>
 <br />
 <p>
   The current graph is a sample of how useful this library is when it comes to
-  data visualization.
+  data visualization. 🕸️
 </p>
 <br />
 <div class="chart-container">
@@ -73,22 +74,8 @@
         {
           label: "Skills Matrix",
           data: [16, 19, 12, 16, 18, 13],
-          backgroundColor: [
-            "rgba(140, 240, 122, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "green",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "blue",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor: "rgba(54, 162, 235, 0.2)",
+          borderColor: "blue",
           borderWidth: 2,
         },
       ],
@@ -115,7 +102,7 @@
 const ctx0 = document.getElementById("introChart"); //use DOM to target the HTML element canvas
 ctx0.getContext("2d");
 
-/*In this case I added a body of options that is notthing else but an object.
+/*In this case I added a body of options that is nothing else but an object.
 NOTE: chart.js has a specific order for the properties of the object to be.*/
 
 const myOptions = { 
@@ -162,39 +149,25 @@ labels: [
 ],
 datasets: [
     {
-    label: "Skills Matrix", 
+    label: "Skills Matrix", //label name of my chart
 /*'data' takes an array with values & 
     the library takes care of pair those values to the labels! */
-    data: [16, 19, 12, 16, 18, 13], 
-    backgroundColor: [
-        "rgba(140, 240, 122, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(255, 159, 64, 0.2)", //colors to be added use RGB values
+        data: [16, 19, 12, 16, 18, 13],
+        backgroundColor: "rgba(54, 162, 235, 0.2)", //colors to be added use RGB values
+        borderColor: "blue",  //but it also takes strings for colors
+        borderWidth: 2,
+      },
     ],
-    borderColor: [
-        "green",                  //but it also takes strings for colors
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "blue",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-    ],
-    borderWidth: 2,
-    },
-],
-},
+  },
 options: myOptions, //I made use of the object constant previously instanciated.
 });
 </code></pre>
 </div>
 <p>
-  I personally like to first go to the docs of the library, skim the explanation, try
-  to understand what is going on, copy and paste the first sample and give it a
-  try.If there is a basic understanding of what the library does I can make
-  better sense of its functionalities and the "<i>how</i>".
+  I personally like to first go to the docs of the library, skim the
+  explanation, try to understand what is going on, copy and paste the first
+  sample and give it a try.If there is a basic understanding of what the library
+  does I can make better sense of its functionalities and the "<i>how</i>".
   <br />
   <br />
   We will move on unto some more examples that I found to be fun to try and

@@ -1,2 +1,71 @@
-<h2>This is the <title>LINES studff</title></h2>
-<p>asdaaaaaaaaaaaaaaaaaaa</p>
+<p>
+  Now lets check out my favorite type of charts. I find that is easier to see
+  where the trend is heading and we can have a better idea of what is
+  <i>"happening"</i> with the data.
+</p>
+<p>
+  We will see as we move unto reading the code the call is easier and we are
+  getting valuable data with relevance to be represented in a chart.
+</p>
+<div class="chart-container-dos">
+  <canvas id="linesChartsTutorial"></canvas>
+</div>
+<script src="app.js"></script>
+<script>
+  const lineChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 0,
+        },
+      },
+    },
+  };
+
+  generateLineChart();
+
+  async function generateLineChart() {
+    const APIdata = await getAPIdata();
+    const ctx3 = document
+      .getElementById("linesChartsTutorial")
+      .getContext("2d");
+
+    console.log(APIdata);
+
+    const linesChartsTutorial = new Chart(ctx3, {
+      type: "line",
+      data: {
+        labels: ["asdas", "asdas", "asdas", "asdas", "asdas", "asdas"], //fechas
+        datasets: [
+          {
+            label: "COVID cases from --- to ---",
+            data: [2, 3, 3, 4, 5, 7], //cases
+            backgroundColor: [
+              "rgba(106, 8, 163, 0.3)",
+              "rgba(132, 245, 66, 0.3)",
+              "rgba(245, 197, 66, 0.3)",
+              "rgba(143, 78, 24, 0.3)",
+              "rgba(75, 192, 192, 0.3)",
+              "rgba(255, 0, 38, 0.3)",
+            ],
+            borderColor: [
+              "rgba(106, 8, 163 1)",
+              "rgba(132, 245, 66, 1)",
+              "rgba(245, 197, 66, 1)",
+              "rgba(143, 78, 24, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(255, 0, 38, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: lineChartOptions,
+    });
+  }
+</script>
+<p>
+  The same way we did in the previous example we are using an asynchronous
+  function to receive data from an API.
+</p>
