@@ -1,0 +1,129 @@
+<p>
+  Pie charts are fun to look at and easy to understand. If you ask me, I would
+  tell you I have <mark>NO IDEA WHATSOEVER</mark> of how to do this on regular
+  HTML and CSS.
+  <i>This is why I would without thinking twice use a JS library.</i>
+</p>
+<p>
+  As a second sample I took on this simple pie chart. Nothing fancy, and the
+  code is extremely simple to understand as we will see shortly.
+  <br />
+  Take a minute to hover trhough the chart and then move on unto the code. 🥧
+</p>
+<div class="chart-container">
+  <canvas id="pieChartsTutorial"></canvas>
+</div>
+<script>
+  const ctx1 = document.getElementById("pieChartsTutorial").getContext("2d");
+
+  let angularVal = randomVal();
+  let reactVal = randomVal();
+  let jqueryVal = randomVal();
+  let alpineVal = randomVal();
+  let gPolymerVal = randomVal();
+  let vueVal = randomVal();
+
+  const pieChartsTutorial = new Chart(ctx1, {
+    type: "pie",
+    data: {
+      labels: ["Angular", "React", "JQuery", "Alpine", "GooglePolymer", "Vue"],
+      datasets: [
+        {
+          data: [
+            angularVal,
+            reactVal,
+            jqueryVal,
+            alpineVal,
+            gPolymerVal,
+            vueVal,
+          ],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+  });
+
+  function randomVal() {
+    return Math.floor(Math.random() * 19);
+  }
+</script>
+<p><br>
+  In this case we made use of many values for the background color as they pair
+  for the order in which they are represented in the <code>data array</code> as
+  well as the <code>labels</code>. Just for demonstration pourposes we can also
+  see a function that add values to certain variables belonging to the
+  <i>data</i>. This is a great example of how we can add values dinamically to
+  our chart.
+</p>
+<div class="code-container">
+<pre><code class="language-javascript">
+//REMEMBER: must follow the naming conventios, for this is very important for Chart.js
+const ctx1 = document.getElementById("pieChartsTutorial").getContext("2d");
+
+let angularVal = randomVal();
+let reactVal = randomVal();
+let jqueryVal = randomVal();
+let alpineVal = randomVal();
+let gPolymerVal = randomVal();
+let vueVal = randomVal();
+
+const pieChartsTutorial = new Chart(ctx1, {
+    type: "pie", //type of chart: π
+    data: {
+    labels: ["Angular", "React", "JQuery", "Alpine", "GooglePolymer", "Vue"],
+    datasets: [
+        {
+        //random values here
+        data: [angularVal, reactVal, jqueryVal, alpineVal, gPolymerVal, vueVal],
+        backgroundColor: [
+            "rgba(255, 99, 132, 0.2)", //RGB color code with opacity for the background fill
+            "rgba(54, 162, 235, 0.2)", //(thought it looks neat 🤓 )
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+        },
+    ],
+    },
+});
+//returns a random number between 1 and 19
+function randomVal(){
+    return  Math.floor(Math.random() * 19);
+}
+</code>
+</pre>
+</div>
+<p>
+  Now we have seen some basic Chart.js, and although pie charts are "fun to look
+  at", I personally find them boring in the sense that I can't get that sense of
+  actual: "serious data representation".
+  <br />
+  Let us move unto much more in dept samples with a bit more advanced ways to
+  populate our data charts.
+</p>

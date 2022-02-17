@@ -1,0 +1,90 @@
+<p>
+  At this point we have seen most of what a <i>basic-intro</i> is, and more than
+  enough to get you started with <code>Chart.js</code><br />
+</p>
+<p>
+  I do however feel important to mention and take on some basic
+  <i>'needs'</i> that I encountered, so we can say we are going to recap on some
+  concepts for styling, labelings and colouring.
+</p>
+<h6>Labels</h6>
+<p>
+  For our bar and lines chart I felt it was going to be more professional
+  without the color banner next to the label. So I did encounter the config that
+  would help there.
+</p>
+
+<div class="code-container">
+  <pre style="margin-bottom: 0px">
+      <code class="language-javascript">
+const lineChartOptions = {
+    responsive: true,
+    plugins: { //The path would be: options.plugins.legend.labels.boxWidth
+        legend: {
+        labels: {
+            boxWidth: 0, //The boxWidth still there but now its width is ZERO! 
+                        //as we specified it.
+        },
+        },
+    },
+};
+    </code></pre>
+</div>
+<p>Lets think of our dot notation and how to interprete the docs.</p>
+<p>
+  An experienced developer would know this, but I thought important to mention
+  that this is the way the docs make mention of values in the configuration.
+  <a
+    href="https://www.chartjs.org/docs/latest/axes/labelling.html"
+    target="_blank"
+    >MORE HERE!</a
+  >
+</p>
+<h6>Colouring & Styles</h6>
+<p>
+  As we know at this point, this is quite the powerful library. We can customize
+  our charts easily by some tweaking of our <i>config body</i> or our
+  <i>options body object</i>. <br /><br />
+  Let's recap on those and see what other options are there!
+</p>
+
+<div class="code-container">
+  <pre style="margin-bottom: 0px">
+      <code class="language-javascript">
+backgroundColor: [ "rgba(255, 99, 132, 0.2)"] //we change attributes such as backgroundColor
+
+//We can also make use of color strings, those are recognize as well
+borderColor: [ "green"] 
+    </code></pre>
+</div>
+
+<h6>Tick configuration</h6>
+<p>
+  I thought this was pretty neat feature. I felt the tick options gave my charts
+  a more professional look.
+</p>
+
+<div class="code-container">
+  <pre style="margin-bottom: 0px">
+      <code class="language-javascript">
+options.scales[scaleId].ticks //this is the way we access the ticks in our options object
+    </code></pre>
+</div>
+
+<p>
+  Ticks is the <i>coordenate-like</i> background and there are many options for
+  customization.
+  <a
+    href="https://www.chartjs.org/docs/latest/axes/styling.html#tick-configuration"
+    target="_blank"
+    >MORE HERE!</a
+  >
+</p>
+<p>
+  Data visualization is fun and one of my favorite parts of programming. Feel
+  free to clone the repo, fork it if you like. Play with it & feel free to try
+  it and break it.
+   <br />
+  <br />
+  Cheers! 🍻
+</p>

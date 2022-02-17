@@ -1,0 +1,167 @@
+<p>
+  Now lets check out my favorite type of charts. I find that is easier to see
+  where the trend is heading and we can have a better idea of what is
+  <i>"happening"</i> with the data.
+</p>
+<p>
+  We will see as we move unto reading the code the call is easier and we are
+  getting valuable data with relevance to be represented in a chart.
+</p>
+<div class="chart-container-dos">
+  <canvas id="linesChartsTutorial"></canvas>
+</div>
+<script src="app.js"></script>
+<script>
+  const lineChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 0,
+        },
+      },
+    },
+  };
+
+  generateLineChart();
+
+  async function generateLineChart() {
+    const APIdata = await getAPIdata();
+    const modelDataObj = createModelFromJSON(APIdata);
+
+    const ctx3 = document
+      .getElementById("linesChartsTutorial")
+      .getContext("2d");
+
+    const linesChartsTutorial = new Chart(ctx3, {
+      type: "line",
+      data: {
+        labels: modelDataObj.dates, //dates
+        datasets: [
+          {
+            label:
+              "COVID cases from " +
+              modelDataObj.healthArea +
+              " " +
+              modelDataObj.province +
+              " from January 01 -2022 to February 14 - 2022",
+            data: modelDataObj.cases, //cases
+            backgroundColor: "red",
+            borderColor: "rgba(240, 127, 131, 0.9)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: lineChartOptions,
+    });
+  }
+</script>
+<p>
+  The same way we did in the previous example we are using an asynchronous
+  function to receive data from an API.
+</p>
+<div class="code-container">
+  <pre style="margin-bottom: 0px">
+    <code class="language-javascript">
+async function getAPIdata() {
+  const response = await fetch(
+    "https://api.opencovid.ca/timeseries?stat=cases&loc=3595&after=01-01-2022&before=15-02-2022");
+
+  if (!response.ok) {
+      throw new Error("Error loading the API");
+  }
+  return response.json() //I return a json object from the COVID API: https://opencovid.ca/api/
+}
+
+/*This guy take care of parsing the json and returning an object
+  that Chart.js can make sense of and create the graph!*/
+function createModelFromJSON(jsonObj) {
+  const cases = [];
+  const dates = [];
+  let province;
+  let healthArea;
+
+  for (let i in jsonObj) {
+      Object.values(jsonObj[i]).forEach(item => {
+          if (cases[0] == null) {
+              province = item.province;
+              healthArea = item.health_region;
+          }
+          dates.push(item.date_report);
+          cases.push(item.cases);
+      });
+  }
+  return {
+      'cases': cases,
+      'dates': dates,
+      'healthArea': healthArea,
+      'province': province
+  }
+}
+</code></pre>
+</div>
+<p>
+  Now that we have our data model from an API call, we can move on unto feed
+  that data to our chart.js line chart!
+</p>
+<div class="code-container">
+  <pre style="margin-bottom: 0px">
+    <code class="language-javascript">
+//again, use of options separate value to tweak to our needs
+const lineChartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      labels: {
+        boxWidth: 0,
+      },
+    },
+  },
+};
+
+generateLineChart();
+
+async function generateLineChart() { //make it asynchronous!
+  const APIdata = await getAPIdata(); //await my answer
+  const modelDataObj = createModelFromJSON(APIdata); //asign the result to a variable I can use.
+
+  const ctx3 = document
+    .getElementById("linesChartsTutorial")
+    .getContext("2d");
+
+  const linesChartsTutorial = new Chart(ctx3, {
+    type: "line",
+    data: {
+      labels: modelDataObj.dates, //dinamycally use the data? YES, PLEASE!
+      datasets: [
+        {
+          label:
+          "COVID cases from " +
+          modelDataObj.healthArea + //concatinate values on names? I'm IN!
+          " " +
+          modelDataObj.province + 
+          " from January 01 -2022 to February 14 - 2022",
+        data: modelDataObj.cases, //cases
+        backgroundColor: "red",
+        borderColor: "rgba(240, 127, 131, 0.9)",
+        borderWidth: 1,
+        },
+      ],
+    },
+    options: lineChartOptions,
+  });
+}
+</code></pre>
+</div>
+<p>
+  Take a moment to apreaciate the fact that the hardest part of creating an
+  interactive chart out of an API call was to create the async functions and the
+  parsing func.
+  <br />Could I be able to do this on pure HTML and CSS with some JS?
+  <i>I dont think so.</i> <mark>JS Libraries, Im telling you!</mark><br />
+</p>
+<p>
+  We will move on unto some technicalities and options that are also included in
+  the library. <br />
+  Lets keep on trying some more of this fascinating data visualization bundle.
+</p>

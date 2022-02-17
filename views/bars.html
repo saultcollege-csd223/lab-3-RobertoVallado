@@ -1,0 +1,189 @@
+<p>
+  Bar charts are better in my opinion to see how data is represented and easier
+  to compare the values.
+  <br />
+  I wanted to find some sort of API to compare <code>chocolate bars</code>
+  <i>"since we are talking about BARS here"</i> 😉 but didnt found any
+  unfortunenately.<br />
+  I did however found a CSV dataset from a github repository that rates
+  companies that make chocolate? There is a bunch of data but we will solely
+  focus on the: <i>"Origin of Cacao/Rate"</i> <br />
+  Our chart show how using Javascript we can parse the CSV to suit our
+  <i>data</i> needs, and to be able to chart the information and make sense of
+  it. <br />
+  <mark> Ultimately that is the pourpose of the library!! </mark>
+</p>
+<p>
+  Some simple JavaScript dust✨ and we will be able to visualize the data in a
+  cool way using our Chart.js!
+</p>
+<p>Let's give it a try. 🍫🍫🍫</p>
+<div class="chart-container-dos">
+  <canvas id="barsChartsTutorial"></canvas>
+</div>
+<script src="app.js"></script>
+<script>
+  
+  const barChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 0,
+        },
+      },
+    },
+  };
+
+  generateChart();
+  
+  async function generateChart() {
+    const CSVdata = await getCSVdata();
+    const ctx2 = document.getElementById("barsChartsTutorial").getContext("2d");
+    const barsChartsTutorial = new Chart(ctx2, {
+      type: "bar",
+      data: {
+        labels: CSVdata.labels,
+        datasets: [
+          {
+            label: "Origin of Cacao/Rate",
+            data: CSVdata.data,
+            backgroundColor: [
+              "rgba(106, 8, 163, 0.3)",
+              "rgba(132, 245, 66, 0.3)",
+              "rgba(245, 197, 66, 0.3)",
+              "rgba(143, 78, 24, 0.3)",
+              "rgba(75, 192, 192, 0.3)",
+              "rgba(255, 0, 38, 0.3)",
+              "rgba(143, 46, 24, 0.3)",
+            ],
+            borderColor: [
+              "rgba(106, 8, 163 1)",
+              "rgba(132, 245, 66, 1)",
+              "rgba(245, 197, 66, 1)",
+              "rgba(143, 78, 24, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(255, 0, 38, 1)",
+              "rgba(143, 46, 24, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: barChartOptions,
+    });
+  }
+</script>
+<p>
+  In this case I made use of an asynchronous function for me to be able to
+  retrieve the data from the CSV file.
+</p>
+<div class="code-container">
+  <pre style="margin-bottom: 0px"><code class="language-javascript">
+async function getCSVdata() {
+    const response = await fetch("dataset/test.csv"); //use a shorter file for testing porpuses
+    const data = await response.text(); 
+    const rows = data.split('\n').slice(8); //just slice and use!
+
+    const originLabels = [];
+    const ratingData = [];
+
+    rows.forEach(rowElement => {
+        let origin, rating;
+        let row = rowElement.split(',');
+        
+        origin = row[1];
+        if (origin.charAt(0) == '"') {
+            console.log()
+            origin = origin.substring(1, origin.length - 1);
+        }
+
+        if (!parseFloat(row[6])) {
+            if (!parseFloat(row[7])) {
+                rating = row[8];
+            } else {
+                rating = row[7];
+            }
+        } else {
+            if (row[6][2] == '%') {
+                rating = row[8];
+            } else {
+                rating = row[6];
+            }
+        }
+        originLabels.push(origin);
+        ratingData.push(rating);
+    })
+    /*return two values as arrays that contain the pertinent data
+     that we will use on our chart! */
+    return {
+        labels: originLabels,
+        data: ratingData 
+    }
+}
+  </code>
+  </pre>
+</div>
+<p>
+  Let's check out our bars-chart code and see how we are adding the data values
+  using our function.
+</p>
+<div class="code-container">
+  <pre style="margin-bottom: 0px"><code class="language-javascript">
+const barChartOptions = { //options body with my specific options
+    responsive: true,
+    plugins: {
+        legend: {
+        labels: {
+            boxWidth: 0,
+        },
+        },
+    },
+    };
+
+    generateChart(); //call my async function
+    async function generateChart() {
+//Note we asign the value that we get from our past function to a local variable asynchronously
+    const CSVdata = await getCSVdata();
+    const ctx2 = document.getElementById("barsChartsTutorial").getContext("2d");
+    const barsChartsTutorial = new Chart(ctx2, {
+        type: "bar",
+        data: {
+        labels: CSVdata.labels, //assing the labels dinamically using a function? 😲
+        datasets: [
+            {
+            label: "Origin of Cacao/Rate",
+//thats right! we just set the values of our data 'JUST LIKE THAT'
+            data: CSVdata.data, //😎
+            backgroundColor: [
+                "rgba(106, 8, 163, 0.3)",
+                "rgba(132, 245, 66, 0.3)",
+                "rgba(245, 197, 66, 0.3)",
+                "rgba(143, 78, 24, 0.3)",
+                "rgba(75, 192, 192, 0.3)",
+                "rgba(255, 0, 38, 0.3)",
+                "rgba(143, 46, 24, 0.3)",
+            ],
+            borderColor: [
+                "rgba(106, 8, 163 1)",
+                "rgba(132, 245, 66, 1)",
+                "rgba(245, 197, 66, 1)",
+                "rgba(143, 78, 24, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(255, 0, 38, 1)",
+                "rgba(143, 46, 24, 1)",
+            ],
+            borderWidth: 1,
+            },
+        ],
+        },
+        options: barChartOptions,
+    });
+    }
+    </code>
+    </pre>
+</div>
+<p>
+  Good job! let's keep on going and find out another way to add values and graph
+  data!. 🙌
+</p>
