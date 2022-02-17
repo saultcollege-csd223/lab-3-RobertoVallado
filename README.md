@@ -8,6 +8,8 @@ Chocolate-Bar Analysis [github](https://github.com/ry05/Chocolate-Bar-Analysis.g
 
 COVID API [opencovid.ca](https://opencovid.ca/api/)
 
+Google pallet [RGB colour picker](https://g.co/kgs/JroxyX)
+
 ## Website
 
 [Chart.js Tutorial by Roberto Vallado](https://saultcollege-csd223.github.io/lab-3-RobertoVallado/)
