@@ -6,9 +6,6 @@ window.addEventListener('load', () => {
     $("#configsContent").load("views/conf.html");
     $("#titlesContent").load("views/titles_and_more.html");
 
-    // var blocks = document.querySelectorAll('pre code:not(hljs)'); Array.prototype.forEach.call(blocks, hljs.highlightBlock);
-
-
     $.getScript("//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js", function () {
         $('pre code:not(hljs)').each(function (i, block) {
             hljs.highlightBlock(block); //applies the highlight forEach block with a <code> & class: language-javascript. 
