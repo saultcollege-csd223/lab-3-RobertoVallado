@@ -3,7 +3,7 @@ window.addEventListener('load', () => {
     $("#pieContent").load("views/pie.html");
     $("#barsContent").load("views/bars.html");
     $("#lineContent").load("views/lines.html");
-    // $("#configsContent").load("views/conf.html");
+    $("#configsContent").load("views/conf.html");
     // $("#titlesContent").load("views/titles_and_more.html");
     $.getScript("http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js", function () {
         $('code.language-javascript').each(function (i, block) {
@@ -53,39 +53,34 @@ async function getCSVdata() {
 }
 
 async function getAPIdata() {
-    const casesArray = [];
-    const dates = [];
-    let province;
-    let healthRegion;
-
     const response = await fetch("https://api.opencovid.ca/timeseries?stat=cases&loc=3595&after=01-01-2022&before=15-02-2022");
 
     if (!response.ok) {
         throw new Error("Error loading the API");
     }
-    response.json()
-        .then(data => {
-            return data.cases;
-        }).catch((error) => {
-            console.log(error)
-        })
-        .then(info => {
-            info.forEach(el => {
-                if (healthRegion == null) {
-                    province = el.province;
-                    healthRegion = el.health_region;
-                }
-                dates.push(el.date_report);
-                casesArray.push(el.cases);
-            })
-            return {
-                cases: casesArray,
-                dateLabels: dates,
-                region: healthRegion,
-                prov: province
-            };
-        })
-        .catch((e) => {
-            console.error("Critical failure: " + e.message)
-        })
+    return response.json()
+}
+
+function createModelFromJSON(jsonObj) {
+    const cases = [];
+    const dates = [];
+    let province;
+    let healthArea;
+
+    for (let i in jsonObj) {
+        Object.values(jsonObj[i]).forEach(item => {
+            if (cases[0] == null) {
+                province = item.province;
+                healthArea = item.health_region;
+            }
+            dates.push(item.date_report);
+            cases.push(item.cases);
+        });
+    }
+    return {
+        'cases': cases,
+        'dates': dates,
+        'healthArea': healthArea,
+        'province': province
+    }
 }
