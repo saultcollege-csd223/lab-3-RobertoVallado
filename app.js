@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     $("#lineContent").load("views/lines.html");
     $("#configsContent").load("views/conf.html");
     $("#titlesContent").load("views/titles_and_more.html");
-    $.getScript("http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js", function () {
+    $.getScript("//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js", function () {
         $('code.language-javascript').each(function (i, block) {
             hljs.highlightBlock(block); //applies the highlight forEach block with a <code> & class: language-javascript. 
         });
